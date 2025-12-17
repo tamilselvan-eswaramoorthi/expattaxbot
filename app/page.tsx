@@ -53,7 +53,8 @@ export default function Home() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        mode: 'cors',
       });
 
       if (response.ok) {
@@ -72,7 +73,11 @@ export default function Home() {
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('An error occurred. Please try again.');
+      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        alert('Unable to connect to server. Please check your connection or try again later.');
+      } else {
+        alert('An error occurred. Please try again.');
+      }
     }
   };
 
