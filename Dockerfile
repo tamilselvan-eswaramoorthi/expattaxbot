@@ -18,6 +18,9 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Clean any existing build artifacts and generated types
+RUN rm -rf .next types/validator.ts types/routes.d.ts types/cache-life.d.ts || true
+
 # Set environment variables for build
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
