@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 export default function Home() {
@@ -21,7 +21,7 @@ export default function Home() {
         const rect = element.getBoundingClientRect();
         const elementTop = rect.top;
         const elementHeight = rect.height;
-        
+
         // Trigger when element is 70% visible in viewport
         if (elementTop < windowHeight * 0.7 && elementTop + elementHeight > 0) {
           newVisibleSteps.push(index);
@@ -40,7 +40,7 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent, type: "waitlist" | "features") => {
     e.preventDefault();
-    
+
     try {
       const payload = {
         email: email,
@@ -89,15 +89,13 @@ export default function Home() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-2">
               <Image
-                src="/logo.png"
-                alt="ExpatTaxBot Logo"
-                width={40}
+                src="/logo.svg"
+                alt="ExpatTaxBot"
+                width={205}
                 height={40}
-                className="rounded-lg bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-950"
+                className="object-contain brightness-0 invert"
+                priority
               />
-              <span className="text-xl font-bold text-gray-900 dark:text-white">
-                Expat<span className="text-amber-700 dark:text-amber-600">Tax</span>Bot
-              </span>
             </div>
             <div className="hidden md:flex gap-8">
               <a href="#features" className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">Features</a>
@@ -109,392 +107,204 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full text-sm font-medium text-blue-700 dark:text-blue-300 mb-8">
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_70%)] from-blue-100/20 dark:from-blue-900/10 pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto text-center relative z-10" id="hero">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full text-sm font-medium text-blue-700 dark:text-blue-300 mb-8 border border-blue-200 dark:border-blue-800">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
-            AI-Powered Expat Tax Automation
+            The Future of International Tax Prep
           </div>
-          
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-            Simplify Expat Tax
+
+          <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-6 leading-[1.1] tracking-tight">
+            Simplify Expat Tax Prep with AI
             <br />
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Prep for CPAs
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-x">
+              Master FETE, FTC, and FBARs in Minutes.
             </span>
           </h1>
-          
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12">
-            Parse and prepare complex expat tax returns with AI. Process Form 1040, FBARs for multiple sources with unprecedented accuracy and speed.
+
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
+            AI extracts T1, SA100, 1040s + auto FTC, treaties, carryforwards.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <a
               href="#waitlist"
-              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl"
+              className="group relative px-8 py-4 bg-blue-600 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5 overflow-hidden"
             >
-              Join the Waitlist
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:animate-shimmer"></div>
+              Join Waitlist
             </a>
             <a
               href="#features"
-              className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg font-semibold border-2 border-gray-200 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-500 transition-all"
+              className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl font-bold border-2 border-gray-200 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-500 transition-all"
             >
-              Learn More
+              See Features
             </a>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
-        <div className="max-w-4xl mx-auto">
+      {/* USP Comparison Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950" id="comparison">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-              Powerful Features for CPAs
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Why CPAs Choose ExpatTaxBot
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Built specifically for tax professionals handling complex expat taxation
+            <p className="text-gray-600 dark:text-gray-400">
+              The only platform built from the ground up for global tax complexity.
             </p>
           </div>
 
-          <div className="space-y-4">
-            {/* Feature 1: Blueprint Extraction */}
-            <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 hover:border-blue-300 dark:hover:border-blue-700 transition-all">
-              <button
-                onClick={() => setExpandedFeature(expandedFeature === 1 ? null : 1)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
-              >
-                <div className="flex items-center gap-4 flex-1">
-                  <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Smart Document Blueprint Extraction
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                      AI automatically extracts and maps data from international tax documents
-                    </p>
-                  </div>
-                </div>
-                <div className={`ml-4 transform transition-transform duration-200 ${expandedFeature === 1 ? 'rotate-45' : ''}`}>
-                  <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
-                </div>
-              </button>
-              <div className={`overflow-hidden transition-all duration-300 ${expandedFeature === 1 ? 'max-h-96' : 'max-h-0'}`}>
-                <div className="px-6 pb-5 pt-2 border-t border-gray-100 dark:border-gray-700">
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Our AI engine intelligently processes Form 1040, schedules, foreign tax returns like T1 (Canada), UK SA100, and other international tax documents with precision field recognition.
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Intelligent field mapping across multiple document formats</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Support for 20+ international tax form types</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Real-time validation and error detection</span>
-                    </li>
-                  </ul>
-                </div>
+          <div className="overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl">
+            <table className="w-full text-left border-collapse bg-white dark:bg-gray-900">
+              <thead>
+                <tr className="bg-gray-50 dark:bg-gray-800/50">
+                  <th className="px-6 py-5 text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider">Feature</th>
+                  <th className="px-6 py-5 text-sm font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider border-x border-gray-100 dark:border-gray-800 bg-blue-50/30 dark:bg-blue-900/10 text-center">ExpatTaxBot</th>
+                  <th className="px-6 py-5 text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-center">Standard Tax Software (e.g., UltraTax CS, TurboTax)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+                {[
+                  {
+                    feature: "Foreign Document Extraction (T1, SA100)",
+                    bot: "AI-optimized for all formats",
+                    standard: "Limited to US forms"
+                  },
+                  {
+                    feature: "FTC & Treaty Benefits",
+                    bot: "Automated calculations & compliance",
+                    standard: "Manual or basic support"
+                  },
+                  {
+                    feature: "Year-Over-Year Carryforwards",
+                    bot: "AI detects from prior returns",
+                    standard: "Requires manual input"
+                  },
+                  {
+                    feature: "FBAR Preparation",
+                    bot: "Full automation & FATCA validation",
+                    standard: "Add-on or extra cost"
+                  },
+                  {
+                    feature: "Smart Questionnaires",
+                    bot: "Adaptive, branded client intake",
+                    standard: "Generic forms"
+                  }
+                ].map((row, i) => (
+                  <tr key={i} className="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+                    <td className="px-6 py-6 font-medium text-gray-900 dark:text-white">{row.feature}</td>
+                    <td className="px-6 py-6 text-center border-x border-gray-100 dark:border-gray-800 bg-blue-50/10 dark:bg-blue-900/5">
+                      <div className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                        {row.bot}
+                      </div>
+                    </td>
+                    <td className="px-6 py-6 text-gray-500 dark:text-gray-400 italic text-center">{row.standard}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Sections */}
+      <section id="features" className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6">
+              Precision-Engineered for CPAs
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+              Everything you need to master international taxation without the manual overhead.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Global Document Mastery */}
+            <div className="group p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-all hover:shadow-xl hover:-translate-y-1">
+              <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Global Document Mastery</h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                While others stop at the 1040, we master the complexity. Handles foreign returns (T1, SA100) that domestic software simply ignores.
+              </p>
             </div>
 
-            {/* Feature 2: Accuracy */}
-            <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 hover:border-green-300 dark:hover:border-green-700 transition-all">
-              <button
-                onClick={() => setExpandedFeature(expandedFeature === 2 ? null : 2)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
-              >
-                <div className="flex items-center gap-4 flex-1">
-                  <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      99.9% Accuracy Guarantee
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                      AI models trained on millions of tax documents ensure precision
-                    </p>
-                  </div>
-                </div>
-                <div className={`ml-4 transform transition-transform duration-200 ${expandedFeature === 2 ? 'rotate-45' : ''}`}>
-                  <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
-                </div>
-              </button>
-              <div className={`overflow-hidden transition-all duration-300 ${expandedFeature === 2 ? 'max-h-96' : 'max-h-0'}`}>
-                <div className="px-6 pb-5 pt-2 border-t border-gray-100 dark:border-gray-700">
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Advanced machine learning models ensure precise data extraction, calculation accuracy, and full compliance with IRS regulations and international tax treaties.
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Continuous learning from CPA feedback and corrections</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Multi-layer validation against tax law databases</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Automated cross-referencing and consistency checks</span>
-                    </li>
-                  </ul>
-                </div>
+            {/* FTC & Treaty Automation */}
+            <div className="group p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-500 transition-all hover:shadow-xl hover:-translate-y-1">
+              <div className="w-14 h-14 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-8 h-8 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
               </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">FTC & Treaty Automation</h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                Ensures 100% compliance across jurisdictions. Automatically calculates foreign tax credits and applies treaty benefits with surgical precision.
+              </p>
             </div>
 
-            {/* Feature 3: Multi-Country Support */}
-            <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 hover:border-purple-300 dark:hover:border-purple-700 transition-all">
-              <button
-                onClick={() => setExpandedFeature(expandedFeature === 3 ? null : 3)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
-              >
-                <div className="flex items-center gap-4 flex-1">
-                  <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Multi-Country Support
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                      Process tax documents from India, Canada, UK, Australia, and more
-                    </p>
-                  </div>
-                </div>
-                <div className={`ml-4 transform transition-transform duration-200 ${expandedFeature === 3 ? 'rotate-45' : ''}`}>
-                  <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
-                </div>
-              </button>
-              <div className={`overflow-hidden transition-all duration-300 ${expandedFeature === 3 ? 'max-h-96' : 'max-h-0'}`}>
-                <div className="px-6 pb-5 pt-2 border-t border-gray-100 dark:border-gray-700">
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Seamlessly handle foreign tax credit calculations, treaty benefits, and multi-jurisdiction compliance requirements for expat clients worldwide.
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Automatic currency conversion with historical rates</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Tax treaty optimization and benefit analysis</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Foreign earned income exclusion calculations</span>
-                    </li>
-                  </ul>
-                </div>
+            {/* Carryforward Intelligence */}
+            <div className="group p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 transition-all hover:shadow-xl hover:-translate-y-1">
+              <div className="w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
               </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Carryforward Intelligence</h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                Stop digging through old PDFs. Our AI analyzes prior year returns to automatically detect and apply carryforwards for maximum tax savings.
+              </p>
             </div>
 
-            {/* Feature 4: Client Portal */}
-            <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 hover:border-orange-300 dark:hover:border-orange-700 transition-all">
-              <button
-                onClick={() => setExpandedFeature(expandedFeature === 4 ? null : 4)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
-              >
-                <div className="flex items-center gap-4 flex-1">
-                  <div className="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Interactive Client Portal
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                      Branded questionnaires with AI-powered personalization
-                    </p>
-                  </div>
-                </div>
-                <div className={`ml-4 transform transition-transform duration-200 ${expandedFeature === 4 ? 'rotate-45' : ''}`}>
-                  <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
-                </div>
-              </button>
-              <div className={`overflow-hidden transition-all duration-300 ${expandedFeature === 4 ? 'max-h-96' : 'max-h-0'}`}>
-                <div className="px-6 pb-5 pt-2 border-t border-gray-100 dark:border-gray-700">
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Create branded web questionnaires that intelligently adapt to each client's unique situation, collecting exactly the information you need.
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Dynamic question flow based on client responses</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Secure document upload and e-signature integration</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Progress tracking and automated reminders</span>
-                    </li>
-                  </ul>
-                </div>
+            {/* FBAR Streamlining */}
+            <div className="group p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-red-500 dark:hover:border-red-500 transition-all hover:shadow-xl hover:-translate-y-1">
+              <div className="w-14 h-14 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-8 h-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">FBAR Streamlining</h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                End-to-end preparation with real-time checks. Automated FATCA validation ensures your clients never face costly filing mistakes.
+              </p>
             </div>
 
-            {/* Feature 5: Year-over-Year Intelligence */}
-            <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 hover:border-cyan-300 dark:hover:border-cyan-700 transition-all">
-              <button
-                onClick={() => setExpandedFeature(expandedFeature === 5 ? null : 5)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
-              >
-                <div className="flex items-center gap-4 flex-1">
-                  <div className="w-10 h-10 bg-cyan-100 dark:bg-cyan-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      Year-over-Year Intelligence
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                      AI identifies carryforwards, patterns, and optimization opportunities
-                    </p>
-                  </div>
-                </div>
-                <div className={`ml-4 transform transition-transform duration-200 ${expandedFeature === 5 ? 'rotate-45' : ''}`}>
-                  <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
-                </div>
-              </button>
-              <div className={`overflow-hidden transition-all duration-300 ${expandedFeature === 5 ? 'max-h-96' : 'max-h-0'}`}>
-                <div className="px-6 pb-5 pt-2 border-t border-gray-100 dark:border-gray-700">
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Upload previous year returns and let AI automatically identify carryforwards, detect changes in client circumstances, and suggest tax-saving opportunities.
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Automatic NOL and credit carryforward tracking</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Change detection alerts for residency and income sources</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Trend analysis for proactive tax planning</span>
-                    </li>
-                  </ul>
-                </div>
+            {/* Planned Questionnaires */}
+            <div className="group p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-amber-500 dark:hover:border-amber-500 transition-all hover:shadow-xl hover:-translate-y-1">
+              <div className="w-14 h-14 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-8 h-8 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
               </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Planned Questionnaires</h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                Client-specific, adaptive intake flows. Brand your practice with smart questionnaires that adjust dynamically to each client situation.
+              </p>
             </div>
 
-            {/* Feature 6: FBAR & Compliance */}
-            <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 hover:border-red-300 dark:hover:border-red-700 transition-all">
-              <button
-                onClick={() => setExpandedFeature(expandedFeature === 6 ? null : 6)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
-              >
-                <div className="flex items-center gap-4 flex-1">
-                  <div className="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      FBAR & Compliance Automation
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                      Never miss critical filing obligations with automated compliance
-                    </p>
-                  </div>
-                </div>
-                <div className={`ml-4 transform transition-transform duration-200 ${expandedFeature === 6 ? 'rotate-45' : ''}`}>
-                  <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
-                </div>
-              </button>
-              <div className={`overflow-hidden transition-all duration-300 ${expandedFeature === 6 ? 'max-h-96' : 'max-h-0'}`}>
-                <div className="px-6 pb-5 pt-2 border-t border-gray-100 dark:border-gray-700">
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Automated FBAR preparation and filing with real-time validation against IRS rules, FATCA compliance, and tax treaty provisions.
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Automatic FBAR threshold monitoring and alerts</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Form 8938, 5471, 8621 preparation support</span>
-                    </li>
-                    <li className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>Real-time compliance deadline tracking</span>
-                    </li>
-                  </ul>
-                </div>
+            {/* Smart Currency Logic */}
+            <div className="group p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-emerald-500 dark:hover:border-emerald-500 transition-all hover:shadow-xl hover:-translate-y-1">
+              <div className="w-14 h-14 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg className="w-8 h-8 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Smart Currency Logic</h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                Automatically handles complex multi-currency conversions using historical exchange rates for 100% precision across all schedules.
+              </p>
             </div>
           </div>
         </div>
@@ -518,9 +328,8 @@ export default function Home() {
             <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-200 via-indigo-200 to-purple-200 dark:from-blue-800 dark:via-indigo-800 dark:to-purple-800 transform md:-translate-x-1/2"></div>
 
             {/* Step 1: Upload Documents */}
-            <div className={`timeline-step relative mb-24 transition-all duration-1000 ${
-              visibleSteps.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}>
+            <div className={`timeline-step relative mb-24 transition-all duration-1000 ${visibleSteps.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}>
               <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
                 {/* Timeline Dot */}
                 <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg z-10 border-4 border-white dark:border-gray-900">
@@ -529,9 +338,8 @@ export default function Home() {
 
                 {/* Content - alternating sides on desktop */}
                 <div className="md:w-1/2 md:pr-16 ml-20 md:ml-0 md:text-right">
-                  <div className={`bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-blue-100 dark:border-blue-900 transition-all duration-700 delay-200 ${
-                    visibleSteps.includes(0) ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-                  }`}>
+                  <div className={`bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-blue-100 dark:border-blue-900 transition-all duration-700 delay-200 ${visibleSteps.includes(0) ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                    }`}>
                     <div className="inline-block p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg mb-4">
                       <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -576,9 +384,8 @@ export default function Home() {
             </div>
 
             {/* Step 2: AI Blueprint Selection */}
-            <div className={`timeline-step relative mb-24 transition-all duration-1000 ${
-              visibleSteps.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}>
+            <div className={`timeline-step relative mb-24 transition-all duration-1000 ${visibleSteps.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}>
               <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
                 {/* Timeline Dot */}
                 <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg z-10 border-4 border-white dark:border-gray-900">
@@ -588,9 +395,8 @@ export default function Home() {
                 {/* Content - right side on desktop */}
                 <div className="hidden md:block md:w-1/2"></div>
                 <div className="md:w-1/2 md:pl-16 ml-20 md:ml-0">
-                  <div className={`bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-indigo-100 dark:border-indigo-900 transition-all duration-700 delay-200 ${
-                    visibleSteps.includes(1) ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-                  }`}>
+                  <div className={`bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-indigo-100 dark:border-indigo-900 transition-all duration-700 delay-200 ${visibleSteps.includes(1) ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                    }`}>
                     <div className="inline-block p-3 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg mb-4">
                       <svg className="w-8 h-8 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -639,9 +445,8 @@ export default function Home() {
             </div>
 
             {/* Step 3: Worksheet Generation */}
-            <div className={`timeline-step relative mb-24 transition-all duration-1000 ${
-              visibleSteps.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}>
+            <div className={`timeline-step relative mb-24 transition-all duration-1000 ${visibleSteps.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}>
               <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
                 {/* Timeline Dot */}
                 <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg z-10 border-4 border-white dark:border-gray-900">
@@ -650,9 +455,8 @@ export default function Home() {
 
                 {/* Content - left side on desktop */}
                 <div className="md:w-1/2 md:pr-16 ml-20 md:ml-0 md:text-right">
-                  <div className={`bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-purple-100 dark:border-purple-900 transition-all duration-700 delay-200 ${
-                    visibleSteps.includes(2) ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-                  }`}>
+                  <div className={`bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-purple-100 dark:border-purple-900 transition-all duration-700 delay-200 ${visibleSteps.includes(2) ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                    }`}>
                     <div className="inline-block p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg mb-4">
                       <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -708,9 +512,8 @@ export default function Home() {
             </div>
 
             {/* Step 4: Export & File */}
-            <div className={`timeline-step relative transition-all duration-1000 ${
-              visibleSteps.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}>
+            <div className={`timeline-step relative transition-all duration-1000 ${visibleSteps.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}>
               <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
                 {/* Timeline Dot */}
                 <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg z-10 border-4 border-white dark:border-gray-900">
@@ -720,9 +523,8 @@ export default function Home() {
                 {/* Content - right side on desktop */}
                 <div className="hidden md:block md:w-1/2"></div>
                 <div className="md:w-1/2 md:pl-16 ml-20 md:ml-0">
-                  <div className={`bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-pink-100 dark:border-pink-900 transition-all duration-700 delay-200 ${
-                    visibleSteps.includes(3) ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-                  }`}>
+                  <div className={`bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-pink-100 dark:border-pink-900 transition-all duration-700 delay-200 ${visibleSteps.includes(3) ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                    }`}>
                     <div className="inline-block p-3 bg-pink-100 dark:bg-pink-900/30 rounded-lg mb-4">
                       <svg className="w-8 h-8 text-pink-600 dark:text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
@@ -777,15 +579,14 @@ export default function Home() {
           </div>
 
           {/* Final CTA */}
-          <div className={`text-center mt-20 transition-all duration-1000 ${
-            visibleSteps.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
+          <div className={`text-center mt-20 transition-all duration-1000 ${visibleSteps.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}>
             <div className="inline-block p-8 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl border-2 border-blue-200 dark:border-blue-800">
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 Ready to transform your expat tax practice?
               </p>
               <a
-                href="#waitlist"
+                href="#testimonials"
                 className="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl"
               >
                 Join the Waitlist Today
@@ -795,123 +596,81 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Waitlist Section */}
-      <section id="waitlist" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 to-indigo-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Join the Waitlist
-          </h2>
-          <p className="text-xl text-blue-100 mb-12">
-            Be among the first CPAs to revolutionize your expat tax practice. 
-            Limited early access spots available.
-          </p>
-
-          {submitted && formType === "waitlist" ? (
-            <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 text-white">
-              <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
-              <p>You&apos;ve been added to our waitlist. We&apos;ll be in touch soon!</p>
-            </div>
-          ) : (
-            <form onSubmit={(e) => handleSubmit(e, "waitlist")} className="max-w-md mx-auto">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                  className="flex-1 px-6 py-4 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
-                />
-                <button
-                  type="submit"
-                  className="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-all shadow-lg"
-                >
-                  Join Waitlist
-                </button>
+      {/* Social Proof / Testimonials */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950" id="testimonials">
+        <div className="max-w-7xl mx-auto" >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
+                Trusted by Forward-Thinking CPAs
+              </h2>
+              <div className="space-y-6">
+                <div className="p-6 bg-blue-50 dark:bg-blue-900/10 rounded-2xl border border-blue-100 dark:border-blue-800">
+                  <p className="text-xl italic text-gray-800 dark:text-gray-200 mb-4">
+                    "At Zeifmans, we deal with countless Canadian T1 returns for US expat clients, and the manual hassle with extractions, FTC under Canada-US treaties, and carryforwards is a real pain. ExpatTaxBot's AI focus on foreign docs like T1 alongside 1040s looks perfect—I'm impressed and ready to integrate it into our practice to slash prep time."
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">RT</div>
+                    <div>
+                      <div className="font-semibold text-gray-900 dark:text-white">Richard Thompson, Tax Partner</div>
+                      <div className="text-sm text-gray-500">Zeifmans, Toronto</div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </form>
-          )}
+            </div>
+            <div className="relative" id="waitlist">
+              <div className="absolute inset-0 bg-blue-500 blur-3xl opacity-10 rounded-full"></div>
+              <div className="relative bg-white dark:bg-gray-900 p-8 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-800">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Join the Beta Waitlist</h3>
 
-          <div className="mt-8 flex justify-center gap-8 text-white/80">
-            <div>
-              <div className="text-3xl font-bold">10+</div>
-              <div className="text-m">CPAs Interested</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold">2026 Tax Session</div>
-              <div className="text-m">Beta Launch</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold">50%</div>
-              <div className="text-m">Early Access Discount</div>
+                {submitted ? (
+                  <div className="text-center py-8">
+                    <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">You're on the list!</h4>
+                    <p className="text-gray-600 dark:text-gray-400">We'll reach out as soon as we're ready for your practice.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={(e: React.FormEvent) => handleSubmit(e, "waitlist")} className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                        placeholder="cpa@firm.com"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">What features are most important for your practice?</label>
+                      <textarea
+                        value={features}
+                        onChange={(e) => setFeatures(e.target.value)}
+                        rows={3}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                        placeholder="e.g., UK SA100 support, FBAR automation..."
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-blue-500/25"
+                    >
+                      Secure Early Access
+                    </button>
+                    <p className="text-center text-xs text-gray-500 mt-4">
+                      Limited spots available for the 2026 tax season.
+                    </p>
+                  </form>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Feature Request Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-              Help Shape the Future
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
-              Tell us what features matter most to your practice
-            </p>
-          </div>
-
-          {submitted && formType === "features" ? (
-            <div className="bg-white dark:bg-gray-900 rounded-lg p-8 text-center shadow-xl">
-              <svg className="w-16 h-16 mx-auto mb-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Thank You!</h3>
-              <p className="text-gray-600 dark:text-gray-300">Your feedback helps us build a better product!</p>
-            </div>
-          ) : (
-            <form onSubmit={(e) => handleSubmit(e, "features")} className="bg-white dark:bg-gray-900 rounded-lg p-8 shadow-xl">
-              <div className="mb-6">
-                <label htmlFor="feature-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Email Address
-                </label>
-                <input
-                  id="feature-email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="your@email.com"
-                />
-              </div>
-
-              <div className="mb-6">
-                <label htmlFor="feature-request" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  What features would you like to see?
-                </label>
-                <textarea
-                  id="feature-request"
-                  value={features}
-                  onChange={(e) => setFeatures(e.target.value)}
-                  required
-                  rows={6}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Tell us about specific countries, document types, integrations, or workflows you need..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg"
-              >
-                Submit Feature Request & Join Waitlist
-              </button>
-            </form>
-          )}
         </div>
       </section>
 
@@ -920,19 +679,16 @@ export default function Home() {
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Image
-              src="/logo.png"
-              alt="ExpatTaxBot Logo"
-              width={32}
-              height={32}
-              className="rounded-lg bg-gray-800"
+              src="/logo.svg"
+              alt="ExpatTaxBot"
+              width={205}
+              height={40}
+              className="object-contain brightness-0 invert"
             />
-            <span className="text-xl font-bold text-white">
-              Expat<span className="text-amber-500">Tax</span>Bot
-            </span>
           </div>
           <p className="mb-4">AI-powered expat taxation automation for CPAs</p>
           <p className="text-sm text-gray-500">
-            © 2025 ExpatTaxBot. All rights reserved.
+            © 2026 ExpatTaxBot. All rights reserved.
           </p>
         </div>
       </footer>
