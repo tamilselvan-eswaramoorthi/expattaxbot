@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   title: "ExpatTaxBot - AI-Powered Expat Tax Automation for CPAs",
   description: "Automate complex expat tax returns with AI. Process Form 1040, foreign tax returns, and FBAR with unprecedented accuracy.",
   icons: {
-    icon: '/logo.png',
-    shortcut: '/logo.png',
-    apple: '/logo.png',
+    icon: '/logo.svg',
+    shortcut: '/logo.svg',
+    apple: '/logo.svg',
   },
 };
 
